@@ -10,9 +10,9 @@ const dbConnection = async () => {
       useUnifiedTopology: true,
       useCreateIndex: true,
     });
-    console.log("DB Connection Success".bgGreen.underline);
+    console.log("DB Connection Success".bgBlue.underline);
   } catch (err) {
-    cosole.log(`${err.message}`.red.underline.bold);
+    console.log(`${err.message}`.red.underline);
     process.exit(1);
   }
 };

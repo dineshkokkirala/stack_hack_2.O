@@ -10,7 +10,8 @@ const userSchema = mongoose.Schema(
     password: {
       type: String,
       required: true,
-      minnlength: 5,
+      minlength: 5,
+      default: "stackhack",
     },
     isadmin: {
       type: Boolean,
