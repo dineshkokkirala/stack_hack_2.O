@@ -1,5 +1,32 @@
-import User from "../models/userModel.js";
+import Employe from "../models/employeModel.js";
+import bcryptjs from "bcryptjs";
+import generateToken from "../utils/generateToken.js";
 
-const userLogin = (req, res) => {};
+const userLogin = async(req, res) => {
+
+    const {email,password} = req.body;
+
+    const user = await Employe.findOne({email});
+    //console.log(user);
+    if(!user){
+        return res.status(404).json({msg:"Invalid Credentials"})
+    }
+
+    let isMatch = await bcryptjs.compare(password,user.password);
+
+    if(!isMatch){
+        return res.status(404).json({msg:"Invalid Credentials"})
+    }else{
+        return res.json({
+            _id:user._id,
+            isadmin:user.isadmin,
+            token:generateToken(user._id),
+            email:user.email,
+            username:user.username
+        })
+    }
+
+};
 
 export { userLogin };
+
