@@ -88,7 +88,7 @@ const employeSchema = mongoose.Schema(
     isadmin: {
       type: Boolean,
       default: false,
-    },
+    }
   },
   {
     timestamp: true,

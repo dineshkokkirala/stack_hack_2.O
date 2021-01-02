@@ -3,8 +3,6 @@ import bcryptjs from "bcryptjs";
 import generateToken from "../utils/generateToken.js";
 import gravatar from "gravatar";
 
-
-
 // route POST /api/admin/add
 // access   Private(only admin)
 // desc     Adding employe
@@ -78,10 +76,20 @@ const addEmploye = async (req, res) => {
   }
 };
 
+const displayEmployee = async(req,res) => {
+
+    const all = await Employe.find();
+
+    if(all){
+        return res.json({all});
+    }else{
+        return res.status(400).json({err:"Error to get all employees"})
+    }
+
+}
 
 
 
 
-
-export { addEmploye };
+export { addEmploye,displayEmployee };
 

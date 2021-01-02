@@ -7,9 +7,11 @@ const protect = async(req,res,next) =>{
     if(req.headers.authorization && req.headers.authorization.startsWith("Bearer")){
         try {
             token = req.headers.authorization.split(" ")[1];
-            const decoded =  jwt.verify(token,process.env.JWT_SECRET);
+            const decoded = jwt.verify(token,process.env.JWT_SECRET);
+           // console.log(decoded);
             req.user = await Employe.findById(decoded.id).select("-password");
             //console.log(req.headers);
+            //console.log(req.user)
             next()  
             
         } catch (err) {
@@ -22,7 +24,38 @@ const protect = async(req,res,next) =>{
         //console.log(err.message);
         return res.status(401).json({err:"Not Authorized, token failed"});
     }
+}
+
+const isAdminUser = async(req,res,next) =>{
+
+    let token;
+    if(req.headers.authorization && req.headers.authorization.startsWith("Bearer")){
+        try {
+            token = req.headers.authorization.split(" ")[1];
+            const decoded = jwt.verify(token,process.env.JWT_SECRET);
+           // console.log(decoded);
+            req.user = await Employe.findById(decoded.id).select("-password");
+            //console.log(req.headers);
+            //console.log(req.user)
+            if(req.user.isadmin){
+                next();
+            }else{
+                return res.status(401).json({err:"Not Authorized, You are not an admin"});
+            }
+              
+            
+        } catch (err) {
+            console.log(err.message);
+            return res.status(401).json({err:"Not Authorized, You are not an admin"});
+        }
+    }
+
+    if(!token){
+        //console.log(err.message);
+        return res.status(401).json({err:"Not Authorized, token failed"});
+    }
 
 }
 
-export {protect};
+
+export {protect,isAdminUser};

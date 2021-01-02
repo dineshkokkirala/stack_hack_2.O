@@ -5,6 +5,7 @@ import dbConnection from "./config/db.js";
 import colors from "colors";
 import userRoutes from "./routes/userRoutes.js";
 import employeRoutes from "./routes/emplyeRoutes.js";
+import leaveRoutes from './routes/leaveRoutes.js'
 dotenv.config();
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(express.json());
 
 app.use("/api/users", userRoutes);
 app.use("/api/admin", employeRoutes);
+app.use("/api/leave",leaveRoutes);
 
 app.get("/test", (req, res) => {
   res.send("Ready to Rock!!!");

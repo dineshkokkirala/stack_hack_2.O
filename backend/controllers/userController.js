@@ -5,7 +5,7 @@ import generateToken from "../utils/generateToken.js";
 const userLogin = async(req, res) => {
 
     const {email,password} = req.body;
-
+    //console.log(email);
     const user = await Employe.findOne({email});
     //console.log(user);
     if(!user){
@@ -27,6 +27,7 @@ const userLogin = async(req, res) => {
     }
 
 };
+
 
 const getUserProfile =async(req,res)=>{
 
