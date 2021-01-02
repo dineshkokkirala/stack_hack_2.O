@@ -29,6 +29,10 @@ const leaveSchema = mongoose.Schema({
     periodtype:{
         type:String,
         required:true
+    },
+    approvedstatus: {
+        type : Number,
+        default : 0
     }   
 },{
     timestamp:true
