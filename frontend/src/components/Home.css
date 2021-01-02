@@ -1,0 +1,13 @@
+.bg-container {
+  background-image: url("../assets/bg-image.jpg");
+  height: 90vh;
+  background-size: cover;
+}
+
+.main_heading {
+  font-weight: 900;
+}
+
+.opac {
+  opacity: 1 !important;
+}
