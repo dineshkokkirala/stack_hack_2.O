@@ -76,9 +76,12 @@ const addEmploye = async (req, res) => {
           err:"Error to save employe"
       })
   }
-
-  
 };
+
+
+
+
+
 
 export { addEmploye };
 

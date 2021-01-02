@@ -28,5 +28,25 @@ const userLogin = async(req, res) => {
 
 };
 
-export { userLogin };
+const getUserProfile =async(req,res)=>{
+
+    const user = await Employe.findById(req.user._id);
+
+    if(user){
+        return res.json({
+            _id:user._id,
+            username:user.username,
+            email:user.email,
+            isadmin:user.isadmin
+        })
+    }else{
+        return res.status(404).json({err:"User not found"});
+    }
+
+}
+
+
+
+
+export { userLogin,getUserProfile };
 
