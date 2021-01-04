@@ -30,23 +30,25 @@ const Home = (props) => {
 
   const authContext = useContext(AuthContext);
 
-  const { login, isAuthenticated, error, isadmin } = authContext;
+  const { login, isAuthenticated, error, isadmin, employeLogin } = authContext;
 
   useEffect(() => {
+    //console.log(isAuthenticated, isadmin);
     if (isAuthenticated && isadmin) {
       props.history.push("/admin");
+    } else if (isAuthenticated && !isadmin) {
+      props.history.push("/employee");
     }
-  }, [isAuthenticated, props.history]);
+  }, [isAuthenticated, props.history, isadmin]);
 
-  const [user, setUser] = useState({
+  const initialState = {
     email: "",
     password: "",
-  });
+  };
 
-  const [employe, setEmploye] = useState({
-    email: "",
-    password: "",
-  });
+  const [user, setUser] = useState(initialState);
+
+  const [employe, setEmploye] = useState(initialState);
 
   const { email, password } = user;
 
@@ -60,13 +62,15 @@ const Home = (props) => {
 
   const adminSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(user);
+    //console.log(user);
     login(user);
+    setUser(initialState);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    login(employe);
+    employeLogin(employe);
+    setEmploye(initialState);
   };
 
   return (
