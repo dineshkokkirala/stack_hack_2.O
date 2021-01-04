@@ -19,6 +19,7 @@ const authReducer = (state, action) => {
         ...action.payload,
         isAuthenticated: true,
         loading: false,
+        isadmin: action.payload.isadmin,
       };
 
     case AUTH_ERROR:
