@@ -8,22 +8,27 @@ import setAuthToken from "./utils/setAuthToken";
 import AddEmploye from "./components/AddEmploye";
 import Employee from "./components/Employee"
 
-if(localStorage.token){
-  setAuthToken(localStorage.token)
+
+
+if (localStorage.token) {
+  // console.log(localStorage.token);
+  setAuthToken(localStorage.token);
 }
 
-function App() {
+const App = () => {
   return (
     <AuthState>
       <BrowserRouter>
         <Navbar />
-        <Route exact path="/" component={Home} />
-        <Route exact path="/admin" component={Admin} />
-        <Route exact path="/add" component={AddEmploye} />
-        <Route exact path="/employee" component={Employee} />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <PrivateRoute exact path="/admin" component={Admin} />
+          <PrivateRoute exact path="/add" component={AddEmploye} />
+          <PrivateRoute exact path="/employee" component={Employee} />
+        </Switch>
       </BrowserRouter>
     </AuthState>
   );
-}
+};
 
 export default App;

@@ -18,7 +18,7 @@ const authReducer = (state, action) => {
         ...state,
         ...action.payload,
         isAuthenticated: true,
-        loading: false,
+        loading: true,
         isadmin: action.payload.isadmin,
       };
 
@@ -31,14 +31,14 @@ const authReducer = (state, action) => {
         token: null,
         isAuthenticated: false,
         error: action.payload,
-        loading: false,
+        loading: true,
         user: null,
       };
     case USER_LOADED:
       return {
         ...state,
         isAuthenticated: true,
-        loading: false,
+        loading: true,
         user: action.payload,
       };
     default:

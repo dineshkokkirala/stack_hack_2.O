@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import AuthContext from "../context/auth/authContext";
 
 const Admin = () => {
+  const authContext = useContext(AuthContext);
+
+  const { loaduser, isAuthenticated } = authContext;
+
+  useEffect(() => {
+    loaduser();
+  }, []);
+
   return (
     <div className="container" style={{ marginTop: "20px" }}>
       <table className="table">
