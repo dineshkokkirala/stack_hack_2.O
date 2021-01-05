@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddEmploye = (prop) => {
+const AddEmploye = () => {
   const initialState = {
     firstname: "",
     lastname: "",
