@@ -7,7 +7,7 @@ const Navbar = () => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" href="#">
+          <Link to="/" className="navbar-brand" href="#">
             <img src={image2} alt="Logo" height="50px" />
           </Link>
           <button
@@ -24,8 +24,13 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarText">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" href="#">
+                <Link to="/" className="nav-link active" aria-current="page">
                   <h1 className="logo_heading">HR Management</h1>
+                </Link>
+              </li>
+              <li>
+                <Link to="/add" className="nav-link d-flex">
+                  <h3 className="nav-link">Add Employee</h3>
                 </Link>
               </li>
             </ul>

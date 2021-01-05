@@ -55,11 +55,40 @@ const AuthState = (props) => {
 
     try {
       const res = await axios.post(url + "/api/users/login", formData, config);
+      //res.data.isadmin=true;
+      if (res.data.isadmin) {
+        dispatch({
+          type: LOGIN_SUCCESS,
+          payload: res.data,
+        });
+        loaduser();
+      } else alert("Invalid Credentials");
+    } catch (err) {
       dispatch({
-        type: LOGIN_SUCCESS,
-        payload: res.data,
+        type: LOGIN_FAIL,
+        payload: err.response.data.msg,
       });
-      loaduser();
+    }
+  };
+
+  const employeLogin = async (formData) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.post(url + "/api/users/login", formData, config);
+      //res.data.isadmin=false;
+      //console.log(res.data.isadmin);
+      if (!res.data.isadmin) {
+        dispatch({
+          type: LOGIN_SUCCESS,
+          payload: res.data,
+        });
+        loaduser();
+      } else alert("Invalid Credentials");
     } catch (err) {
       dispatch({
         type: LOGIN_FAIL,
@@ -78,6 +107,7 @@ const AuthState = (props) => {
         error: state.error,
         isadmin: state.isadmin,
         login,
+        employeLogin,
       }}
     >
       {props.children}

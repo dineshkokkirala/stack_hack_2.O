@@ -17,6 +17,7 @@ function App() {
         <Navbar />
         <Route exact path="/" component={Home} />
         <Route exact path="/admin" component={Admin} />
+        <Route exact path="/employee" component={Employee} />
       </BrowserRouter>
     </AuthState>
   );
