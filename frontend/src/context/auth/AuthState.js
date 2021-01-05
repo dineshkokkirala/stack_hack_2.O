@@ -19,10 +19,10 @@ const url = "http://localhost:5000";
 const AuthState = (props) => {
   const initialState = {
     isAuthenticated: null,
-    loading: true,
+    loading: false,
     user: null,
     error: null,
-    isadmin: false,
+    isadmin: null,
     token: localStorage.getItem("token"),
   };
 
@@ -62,7 +62,7 @@ const AuthState = (props) => {
           payload: res.data,
         });
         loaduser();
-      } else alert("Invalid Credentials");
+      } else alert("You are not an Admin");
     } catch (err) {
       dispatch({
         type: LOGIN_FAIL,
@@ -88,7 +88,7 @@ const AuthState = (props) => {
           payload: res.data,
         });
         loaduser();
-      } else alert("Invalid Credentials");
+      } else alert("You are not an Employee");
     } catch (err) {
       dispatch({
         type: LOGIN_FAIL,
@@ -108,6 +108,7 @@ const AuthState = (props) => {
         isadmin: state.isadmin,
         login,
         employeLogin,
+        loaduser,
       }}
     >
       {props.children}
