@@ -38,6 +38,9 @@ const Home = (props) => {
       props.history.push("/admin");
     } else if (isAuthenticated && !isadmin) {
       props.history.push("/employee");
+    } else {
+      //console.log("nul");
+      props.history.push("/");
     }
   }, [isAuthenticated, props.history, isadmin]);
 
