@@ -2,18 +2,24 @@ import React from "react";
 
 const Admin = () => {
   return (
-    <div>
-      <table class="table">
-        <thead class="table-dark">
-          <tr>Employee Id</tr>
-          <tr>Username</tr>
-          <tr>Preview</tr>
+    <div className="container" style={{ marginTop: "20px" }}>
+      <table className="table">
+        <thead className="thead table-dark">
+          <tr>
+            <th scope="col">Employee Id</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Preview</th>
+          </tr>
         </thead>
         <tbody>
-          <tr>1001</tr>
-          <tr>mern</tr>
           <tr>
-            <a>view</a>
+            <th scope="row">1002</th>
+            <td>Mern</td>
+            <td>stack@stack.com</td>
+            <td>
+              <a href="/">view</a>
+            </td>
           </tr>
         </tbody>
       </table>

@@ -28,9 +28,11 @@ const Navbar = () => {
                   <h1 className="logo_heading">HR Management</h1>
                 </Link>
               </li>
+            </ul>
+            <ul className="navbar-nav">
               <li>
-                <Link to="/add" className="nav-link d-flex">
-                  <h3 className="nav-link">Add Employee</h3>
+                <Link to="/add" className="nav-link">
+                  Add Employee
                 </Link>
               </li>
             </ul>

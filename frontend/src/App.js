@@ -5,6 +5,7 @@ import AuthState from "./context/auth/AuthState";
 import Admin from "./components/Admin";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Employee from "./components/Employee";
+import AddEmploye from "./components/AddEmploye";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Navbar />
         <Route exact path="/" component={Home} />
         <Route exact path="/admin" component={Admin} />
+        <Route exact path="/add" component={AddEmploye} />
         <Route exact path="/employee" component={Employee} />
       </BrowserRouter>
     </AuthState>
