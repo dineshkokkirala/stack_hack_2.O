@@ -4,6 +4,11 @@ import Navbar from "./components/Navbar";
 import AuthState from "./context/auth/AuthState";
 import Admin from "./components/Admin";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import setAuthToken from "./utils/setAuthToken";
+
+if(localStorage.token){
+  setAuthToken(localStorage.token)
+}
 
 function App() {
   return (
