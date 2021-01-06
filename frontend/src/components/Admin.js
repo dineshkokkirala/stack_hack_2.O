@@ -7,7 +7,7 @@ const Admin = () => {
   const { loaduser, isAuthenticated } = authContext;
 
   useEffect(() => {
-    loaduser();
+    // loaduser();
   }, []);
 
   return (

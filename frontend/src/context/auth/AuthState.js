@@ -61,6 +61,7 @@ const AuthState = (props) => {
           type: LOGIN_SUCCESS,
           payload: res.data,
         });
+        //console
         loaduser();
       } else alert("You are not an Admin");
     } catch (err) {

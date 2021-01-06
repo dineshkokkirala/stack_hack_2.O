@@ -1,6 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./Home.css";
-import AuthContext from "../context/auth/authContext";
+// import AuthContext from "../context/auth/authContext";
+import axios from "axios";
+import Employee from "./Employee";
+import { Redirect } from "react-router-dom";
 
 const Home = (props) => {
   function myFunc1() {
@@ -28,58 +31,171 @@ const Home = (props) => {
     }
   }
 
-  const authContext = useContext(AuthContext);
+  // const authContext = useContext(AuthContext);
 
-  const { login, isAuthenticated, error, isadmin, employeLogin } = authContext;
+  // const { login, isAuthenticated, error, isadmin, employeLogin } = authContext;
 
-  useEffect(() => {
-    //console.log(isAuthenticated, isadmin);
-    if (isAuthenticated && isadmin) {
-      props.history.push("/admin");
-    } else if (isAuthenticated && !isadmin) {
-      props.history.push("/employee");
-    } else {
-      //console.log("nul");
-      props.history.push("/");
-    }
-  }, [isAuthenticated, props.history, isadmin]);
+  // useEffect(() => {
+  //   //console.log(isAuthenticated, isadmin);
+  //   if (isAuthenticated && isadmin) {
+  //     props.history.push("/admin");
+  //   } else if (isAuthenticated && !isadmin) {
+  //     props.history.push("/employee");
+  //   } else {
+  //     //console.log("nul");
+  //     props.history.push("/");
+  //   }
+  // }, [isAuthenticated, props.history, isadmin]);
 
-  const initialState = {
+  // const initialState = {
+  //   email: "",
+  //   password: "",
+  // };
+
+  // const [user, setUser] = useState(initialState);
+
+  // const [employe, setEmploye] = useState(initialState);
+
+  // const { email, password } = user;
+
+  // const changeHandler = (e) => {
+  //   setUser({ ...user, [e.target.name]: e.target.value });
+  // };
+
+  // const employeChangeHandler = (e) => {
+  //   setEmploye({ ...employe, [e.target.name]: e.target.value });
+  // };
+
+  // const adminSubmitHandler = (e) => {
+  //   e.preventDefault();
+  //   //console.log(user);
+  //   login(user);
+  //   setUser(initialState);
+  // };
+
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   employeLogin(employe);
+  //   setEmploye(initialState);
+  // };
+  const [employee, setEmployee] = useState({
     email: "",
     password: "",
-  };
-
-  const [user, setUser] = useState(initialState);
-
-  const [employe, setEmploye] = useState(initialState);
-
-  const { email, password } = user;
-
+    error: "",
+    loading: false,
+    didRedirect: false,
+    success: false,
+  });
+  const { email, password, error, loading, didRedirect } = employee;
   const changeHandler = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setEmployee({ ...employee, [e.target.name]: e.target.value });
   };
 
-  const employeChangeHandler = (e) => {
-    setEmploye({ ...employe, [e.target.name]: e.target.value });
+  const elogin = async (user_data) => {
+    return fetch("http://localhost:5000/api/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user_data),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const authenticate = (data) => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("token", JSON.stringify(data));
+      setEmployee({
+        ...employee,
+        didRedirect: true,
+      });
+    }
+  };
+
+  const isAuthenticated_true = () => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+    if (localStorage.getItem("token")) {
+      return JSON.parse(localStorage.getItem("token"));
+    } else {
+      return false;
+    }
   };
 
   const adminSubmitHandler = (e) => {
     e.preventDefault();
-    //console.log(user);
-    login(user);
-    setUser(initialState);
+    setEmployee({ ...employee, error: false, loading: true });
+    const adminDetails = { email, password };
+    //console.log(adminDetails)
+    //  const indata =  elogin(adminDetails)
+    // console.log(indata)
+    elogin(adminDetails)
+      .then((data) => {
+        if (data.msg) {
+          setEmployee({
+            ...employee,
+            error: data.msg,
+            loading: false,
+          });
+          //console.log(employee);
+        } else {
+          const admin_and_token = {
+            isadmin: data.isadmin,
+            token: data.token,
+          };
+          //console.log(admin_and_token);
+          authenticate(admin_and_token);
+        }
+        //console.log(employee);
+      })
+      .catch(() => console.log("Login failed"));
+
+      setEmployee({
+        email: "",
+        password: "",
+        error: "",
+        loading: false,
+        didRedirect: false,
+        success: false,
+      })
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    employeLogin(employe);
-    setEmploye(initialState);
+  const performRedirect = () => {
+    if (didRedirect) {
+      //console.log(employee);
+      const bool = isAuthenticated_true();
+      // console.log(bool);
+      if (bool && bool.isadmin) {
+        props.history.push("/admin");
+      } else {
+        props.history.push("/employee");
+      }
+    }
+  };
+
+  const errorMessage = () => {
+    return (
+      <div className="row">
+        <div
+          className="alert alert-danger"
+          style={{ display: error ? "" : "none" }}
+        >
+          {error}
+        </div>
+      </div>
+    );
   };
 
   return (
     <div className="bg-container">
       <div className="container">
-        <div className="row">
+        <div className="row"> 
           <div className="col-12 col-md-6 mt-5">
             <div
               className="card shadow text-center p-4"
@@ -90,6 +206,7 @@ const Home = (props) => {
                 margin: "100px auto",
               }}
             >
+              {errorMessage()}
               <h3 className="mb-5 main_heading">Admin Login</h3>
               <form onSubmit={adminSubmitHandler}>
                 <div className="form-group mb-4">
@@ -139,15 +256,13 @@ const Home = (props) => {
               }}
             >
               <h3 className="mb-5 main_heading">Employee Login</h3>
-              <form onSubmit={submitHandler}>
+              <form>
                 <div className="form-group mb-4">
                   <input
                     type="email"
                     name="email"
                     className="form-control"
                     placeholder="Email"
-                    value={employe.email}
-                    onChange={employeChangeHandler}
                   />
                 </div>
                 <div className="form-group div2">
@@ -162,8 +277,6 @@ const Home = (props) => {
                     className="form-control"
                     placeholder="Password"
                     id="pass1"
-                    value={employe.password}
-                    onChange={employeChangeHandler}
                     name="password"
                   />
                 </div>
@@ -179,6 +292,7 @@ const Home = (props) => {
           </div>
         </div>
       </div>
+      {performRedirect()}
     </div>
   );
 };

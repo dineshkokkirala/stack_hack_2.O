@@ -5,13 +5,16 @@ import dbConnection from "./config/db.js";
 import colors from "colors";
 import userRoutes from "./routes/userRoutes.js";
 import employeRoutes from "./routes/emplyeRoutes.js";
-import leaveRoutes from './routes/leaveRoutes.js'
+import leaveRoutes from "./routes/leaveRoutes.js";
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT;
 
 //DB Connection
+//URI = "mongodb+srv://stackhack:Stackhack123456@stackhack.hrj84.mongodb.net/stackhack?retryWrites=true&w=majority"
+//URI = mongodb://localhost:27017/hr_management
+
 dbConnection();
 
 app.use(cors());
@@ -20,7 +23,7 @@ app.use(express.json());
 
 app.use("/api/users", userRoutes);
 app.use("/api/admin", employeRoutes);
-app.use("/api/leave",leaveRoutes);
+app.use("/api/leave", leaveRoutes);
 
 app.get("/test", (req, res) => {
   res.send("Ready to Rock!!!");
