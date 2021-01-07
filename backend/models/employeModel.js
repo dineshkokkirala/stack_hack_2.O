@@ -4,8 +4,7 @@ const employeSchema = mongoose.Schema(
   {
     username: {
       type: String,
-      required: true,
-      unique: true,
+      required: true
     },
     firstname: {
       type: String,
@@ -30,8 +29,7 @@ const employeSchema = mongoose.Schema(
     },
     contactnumber: {
       type: String,
-      required: true,
-      maxlength: 10,
+      required: true
     },
     role: {
       type: String,

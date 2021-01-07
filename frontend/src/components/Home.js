@@ -221,15 +221,15 @@ const Home = (props) => {
             token: data.token,
           };
          // console.log(admin_and_token);
-          // if(data.isadmin)
+           if(!data.isadmin)
           authenticate2(admin_and_token);
-          // else{
-          //   setEmployee({
-          //     ...employee,
-          //     error:"You are not an admin",
-          //     loading:false
-          //   })
-          // }
+          else{
+            setEmployee2({
+              ...employee2,
+              error2:"You are not an employee",
+              loading2:false
+            })
+          }
         }
         //console.log(employee);
       })

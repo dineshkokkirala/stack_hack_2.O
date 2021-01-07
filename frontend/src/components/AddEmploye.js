@@ -1,23 +1,25 @@
 import React, { useState } from "react";
 
-const AddEmploye = () => {
+const AddEmploye = (props) => {
   const initialState = {
-    firstname: "",
-    lastname: "",
-    username: "",
-    email: "",
-    gender: "",
-    dateofbirth: "",
-    contactnumber: "",
-    maritialstatus: "",
-    address: "",
-    role: "",
-    salary: "",
-    bloodgroup: "",
-    nationality: "",
-    department: "",
-    worktype: "",
-    joiningdate: "",
+    firstname: "Dinesh",
+    lastname: "kokkirala",
+    username: "dineshthop",
+    email: "dinesh@thop.com",
+    gender: "male",
+    dateofbirth: "08/05/2000",
+    contactnumber: "65454555",
+    maritialstatus: "single",
+    address: "dkfjsdfn",
+    role: "sdfds",
+    salary: "10000000000",
+    bloodgroup: "sdfds",
+    nationality: "sdf",
+    department: "sdf",
+    worktype: "sdf",
+    joiningdate: "15/5/6515",
+    didRedirect:false,
+    error:""
   };
 
   const [employee, setEmployee] = useState(initialState);
@@ -41,19 +43,71 @@ const AddEmploye = () => {
     joiningdate,
   } = employee;
 
+  const addEmployee = (data) =>{
+    return fetch("http://localhost:5000/api/admin/add",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":localStorage.getItem("token")
+      },
+      body:JSON.stringify(data)
+    }).then((res)=>{
+      return res.json()
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+
   const changeHandler = (e) => {
     setEmployee({ ...employee, [e.target.name]: e.target.value });
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(employee);
+   // console.log(employee);
+    const input_data = {
+      firstname,
+      lastname,
+      username,
+      email,
+      gender,
+      dateofbirth,
+      contactnumber,
+      maritialstatus,
+      address,
+      role,
+      salary,
+      bloodgroup,
+      nationality,
+      department,
+      worktype,
+      joiningdate,
+    } 
+    //console.log(input_data)
+    addEmployee(input_data)
+    .then((data)=>{
+      console.log(data)
+      if(data.err){
+        setEmployee({
+          ...employee,
+          error:data.err,
+        })
+      } else{
+          props.history.push('/admin');
+          setEmployee(initialState);
+      }
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
     setEmployee(initialState);
+
   };
 
   return (
-    <div className="container">
+    <div className="container mb-5 mt-3 p-4">
       <div className="row">
+        <h1>Add Employee</h1>
         <form className="row g-3" onSubmit={submitHandler}>
           <div className="col-md-6">
             <label forHtml="firstname" className="form-label">
@@ -285,7 +339,7 @@ const AddEmploye = () => {
           </div>
 
           <div className="col-12">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary w-100">
               Add
             </button>
           </div>

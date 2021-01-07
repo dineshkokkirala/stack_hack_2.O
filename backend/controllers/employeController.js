@@ -20,7 +20,6 @@ const addEmploye = async (req, res) => {
     address,
     salary,
     bloodgroup,
-    password,
     maritialstatus,
     nationality,
     department,
@@ -31,7 +30,6 @@ const addEmploye = async (req, res) => {
 
   if (
     !username ||
-    !password||
     !firstname ||
     !lastname ||
     !email ||
@@ -59,7 +57,7 @@ const addEmploye = async (req, res) => {
   }
 
   let salt = await bcryptjs.genSalt(10);
-  let hashed_password = await bcryptjs.hash(password, salt);
+  let hashed_password = await bcryptjs.hash("stackhack", salt);
 
   const avatar = gravatar.url(email, {
     s: "200",
