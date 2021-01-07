@@ -10,7 +10,7 @@ import Employee from "./components/Employee";
 import PrivateRoute from "./components/PrivateRoute";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
 import { isadmin_true } from "./authHelpers";
-
+import GetEmployee from "./components/GetEmployee"
 // if (localStorage.token) {
 //   // console.log(localStorage.token);
 //   setAuthToken(localStorage.token);
@@ -29,6 +29,7 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <AdminPrivateRoute exact path="/admin" component={Admin} />
           <AdminPrivateRoute exact path="/add" component={AddEmploye} />
+          <AdminPrivateRoute exact path="/getEmployee" component={GetEmployee} />
           <PrivateRoute exact path="/employee" component={Employee} />
         </Switch>
       </BrowserRouter>

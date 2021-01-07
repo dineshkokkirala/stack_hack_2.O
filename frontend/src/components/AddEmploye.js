@@ -86,7 +86,7 @@ const AddEmploye = (props) => {
     //console.log(input_data)
     addEmployee(input_data)
     .then((data)=>{
-      console.log(data)
+      //console.log(data)
       if(data.err){
         setEmployee({
           ...employee,
@@ -103,6 +103,21 @@ const AddEmploye = (props) => {
     setEmployee(initialState);
 
   };
+
+  const errorMessage = () => {
+    return (
+      <div className="row mt-4">
+        <div
+          className="alert alert-danger"
+          style={{ display: employee.error ? "" : "none" }}
+        >
+          {employee.error}
+        </div>
+      </div>
+    );
+  };
+
+
 
   return (
     <div className="container mb-5 mt-3 p-4">
@@ -337,7 +352,7 @@ const AddEmploye = (props) => {
               onChange={changeHandler}
             />
           </div>
-
+          {errorMessage()}
           <div className="col-12">
             <button type="submit" className="btn btn-primary w-100">
               Add

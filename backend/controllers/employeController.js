@@ -110,7 +110,7 @@ const addEmploye = async (req, res) => {
 };
 
 const displayEmployee = async (req, res) => {
-  const all = await Employe.find();
+  const all = await Employe.find({isadmin:false});
 
   if (all) {
     return res.json(all);
@@ -119,4 +119,13 @@ const displayEmployee = async (req, res) => {
   }
 };
 
-export { addEmploye, displayEmployee };
+const getEmployeeDetails = async(req,res) =>{
+  const employee = await Employe.findById(req.params.id)
+  if(employee){
+    return res.json(employee);
+  }else{
+    return res.status(400).json({err:"Cannot get Employee details"})
+  }
+}
+
+export { addEmploye, displayEmployee,getEmployeeDetails };
