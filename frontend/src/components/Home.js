@@ -86,9 +86,21 @@ const Home = (props) => {
     didRedirect: false,
     success: false,
   });
+  const [employee2, setEmployee2] = useState({
+    email2: "",
+    password2: "",
+    error2: "",
+    loading2: false,
+    didRedirect2: false,
+    success2: false,
+  });
   const { email, password, error, loading, didRedirect } = employee;
+  const { email2, password2, error2, loading2, didRedirect2 } = employee2;
   const changeHandler = (e) => {
     setEmployee({ ...employee, [e.target.name]: e.target.value });
+  };
+  const changeHandler2 = (event) => {
+    setEmployee2({ ...employee2, [event.target.name]:event.target.value });
   };
 
   const elogin = async (user_data) => {
@@ -116,13 +128,26 @@ const Home = (props) => {
       });
     }
   };
+  const authenticate2 = (data) => {
+    //console.log(data)
+    if (typeof window !== "undefined") {
+      localStorage.setItem("token2", JSON.stringify(data));
+      setEmployee2({
+        ...employee2,
+        didRedirect2: true,
+      });
+    }
+  };
 
   const isAuthenticated_true = () => {
     if (typeof window === "undefined") {
       return false;
     }
-    if (localStorage.getItem("token")) {
-      return JSON.parse(localStorage.getItem("token"));
+    if (localStorage.getItem("token")||localStorage.getItem("token2")) {
+      if(localStorage.getItem("token")){
+        return JSON.parse(localStorage.getItem("token"))
+      }
+      return JSON.parse(localStorage.getItem("token2"));
     } else {
       return false;
     }
@@ -150,7 +175,15 @@ const Home = (props) => {
             token: data.token,
           };
           //console.log(admin_and_token);
+          if(data.isadmin)
           authenticate(admin_and_token);
+          else{
+            setEmployee({
+              ...employee,
+              error:"You are not an admin",
+              loading:false
+            })
+          }
         }
         //console.log(employee);
       })
@@ -166,8 +199,66 @@ const Home = (props) => {
       })
   };
 
+  const employeSubmitHandler = (e) => {
+    e.preventDefault();
+    setEmployee2({ ...employee2, error2: false, loading2: true });
+    const employeDetails = { email:email2, password:password2 };
+   // console.log(employee2)
+    //  const indata =  elogin(adminDetails)
+    // console.log(indata)
+    elogin(employeDetails)
+      .then((data) => {
+        if (data.msg) {
+          setEmployee2({
+            ...employee2,
+            error2: data.msg,
+            loading2: false,
+          });
+          //console.log(employee);
+        } else {
+          const admin_and_token = {
+            isadmin: data.isadmin,
+            token: data.token,
+          };
+         // console.log(admin_and_token);
+          // if(data.isadmin)
+          authenticate2(admin_and_token);
+          // else{
+          //   setEmployee({
+          //     ...employee,
+          //     error:"You are not an admin",
+          //     loading:false
+          //   })
+          // }
+        }
+        //console.log(employee);
+      })
+      .catch(() => console.log("Login failed"));
+
+      setEmployee2({
+        email2: "",
+        password2: "",
+        error2: "",
+        loading2: false,
+        didRedirect2: false,
+        success2: false,
+      })
+  };
+
   const performRedirect = () => {
     if (didRedirect) {
+      //console.log(employee);
+      const bool = isAuthenticated_true();
+      // console.log(bool);
+      if (bool && bool.isadmin) {
+        props.history.push("/admin");
+      } else {
+        props.history.push("/employee");
+      }
+    }
+  };
+  const performRedirect2 = () => {
+    if (didRedirect2) {
       //console.log(employee);
       const bool = isAuthenticated_true();
       // console.log(bool);
@@ -187,6 +278,19 @@ const Home = (props) => {
           style={{ display: error ? "" : "none" }}
         >
           {error}
+        </div>
+      </div>
+    );
+  };
+
+  const errorMessage2 = () => {
+    return (
+      <div className="row">
+        <div
+          className="alert alert-danger"
+          style={{ display: error2 ? "" : "none" }}
+        >
+          {error2}
         </div>
       </div>
     );
@@ -255,14 +359,17 @@ const Home = (props) => {
                 margin: "100px auto",
               }}
             >
+              {errorMessage2()}
               <h3 className="mb-5 main_heading">Employee Login</h3>
-              <form>
+              <form onSubmit={employeSubmitHandler}>
                 <div className="form-group mb-4">
                   <input
                     type="email"
-                    name="email"
+                    name="email2"
                     className="form-control"
                     placeholder="Email"
+                    onChange={changeHandler2}
+                    value={email2}
                   />
                 </div>
                 <div className="form-group div2">
@@ -277,7 +384,9 @@ const Home = (props) => {
                     className="form-control"
                     placeholder="Password"
                     id="pass1"
-                    name="password"
+                    name="password2"
+                    onChange={changeHandler2}
+                    value={password2}
                   />
                 </div>
                 <button
@@ -293,6 +402,7 @@ const Home = (props) => {
         </div>
       </div>
       {performRedirect()}
+      {performRedirect2()}
     </div>
   );
 };
