@@ -8,6 +8,7 @@ import setAuthToken from "./utils/setAuthToken";
 import AddEmploye from "./components/AddEmploye";
 import Employee from "./components/Employee";
 import PrivateRoute from "./components/PrivateRoute";
+import AdminPrivateRoute from "./components/AdminPrivateRoute";
 
 if (localStorage.token) {
   // console.log(localStorage.token);
@@ -21,9 +22,9 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/admin" component={Admin} />
-          <Route exact path="/add" component={AddEmploye} />
-          <Route exact path="/employee" component={Employee} />
+          <AdminPrivateRoute exact path="/admin" component={Admin} />
+          <AdminPrivateRoute exact path="/add" component={AddEmploye} />
+          <PrivateRoute exact path="/employee" component={Employee} />
         </Switch>
       </BrowserRouter>
     </AuthState>
