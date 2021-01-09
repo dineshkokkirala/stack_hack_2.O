@@ -128,4 +128,27 @@ const getEmployeeDetails = async(req,res) =>{
   }
 }
 
-export { addEmploye, displayEmployee,getEmployeeDetails };
+const changePassword = async(req,res)=>{
+  const user = await Employe.findById(req.params.id);
+  const {old_password,new_password,confirm_password} = req.body;
+  if(!old_password||!new_password||!confirm_password){
+    return res.status(400).json({err:"All fields are required"})
+  }
+  const ismatch = await bcryptjs.compare(old_password,user.password);
+  if(!ismatch){
+    return res.status(400).json({err:"Old Password is Wrong"})
+  }
+  if(new_password!==confirm_password){
+    return res.status(400).json({err:"New password & Confirm password must be same"})
+  }
+  const hashed = await bcryptjs.hash(new_password,10)
+  user.password = hashed;
+  await user.save()
+  return res.json({
+    msg:"Password changed Successfully"
+  })
+
+}
+
+
+export { addEmploye, displayEmployee,getEmployeeDetails,changePassword };

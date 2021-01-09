@@ -128,6 +128,7 @@ const Home = (props) => {
       });
     }
   };
+
   const authenticate2 = (data) => {
     //console.log(data)
     if (typeof window !== "undefined") {
@@ -173,6 +174,8 @@ const Home = (props) => {
           const admin_and_token = {
             isadmin: data.isadmin,
             token: data.token,
+            userId:data._id,
+            username:data.username
           };
           //console.log(admin_and_token);
           if(data.isadmin)
@@ -219,6 +222,8 @@ const Home = (props) => {
           const admin_and_token = {
             isadmin: data.isadmin,
             token: data.token,
+            userId:data._id,
+            username:data.username
           };
          // console.log(admin_and_token);
            if(!data.isadmin)
