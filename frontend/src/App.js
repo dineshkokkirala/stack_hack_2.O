@@ -13,6 +13,8 @@ import { isadmin_true } from "./authHelpers";
 import GetEmployee from "./components/GetEmployee"
 import AddLeave from "./components/AddLeave";
 import MyLeaves from "./components/MyLeaves";
+import PendingLeaves from "./components/PendingLeaves";
+import GetLeave from "./components/GetLeave";
 
 
 
@@ -29,6 +31,8 @@ const App = () => {
           <PrivateRoute exact path="/employee" component={Employee} />
           <PrivateRoute exact path="/apply_leave" component={AddLeave} />
           <PrivateRoute exact path="/my_leaves" component={MyLeaves} />
+          <AdminPrivateRoute exact path="/pending_leaves" component={PendingLeaves} />
+          <AdminPrivateRoute exact path="/getLeave" component={GetLeave} />
         </Switch>
       </BrowserRouter>
     </AuthState>

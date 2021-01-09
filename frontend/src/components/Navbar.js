@@ -35,6 +35,11 @@ const Navbar = () => {
               isadmin_true() && (
                 <ul className="navbar-nav">
                   <li>
+                    <Link to="/pending_leaves" className="nav-link">
+                      Leave Management
+                    </Link>
+                  </li>
+                  <li>
                     <Link to="/add" className="nav-link">
                       Add Employee
                     </Link>

@@ -12,13 +12,15 @@ const addLeave = async(req,res) =>{
     const to_date_modified = todate.split("-");
     const final_from = from_date_modified[2]+"-"+from_date_modified[1]+"-"+from_date_modified[0];
     const final_to = to_date_modified[2]+"-"+to_date_modified[1]+"-"+to_date_modified[0];
+    let user = await Employe.findById(userId);
     const leave = await Leave.create({
         userId,
         leavetype,
         reason,
         fromdate:final_from,
         todate:final_to,
-        periodtype
+        periodtype,
+        username:user.username
     })
     
     if(leave){
@@ -29,7 +31,8 @@ const addLeave = async(req,res) =>{
             fromdate:leave.fromdate,
             todate:leave.todate,
             periodtype:leave.periodtype,
-            approvedstatus:leave.approvedstatus
+            approvedstatus:leave.approvedstatus,
+            username:leave.username
         })
     }else{
         return res.json({
@@ -41,11 +44,17 @@ const addLeave = async(req,res) =>{
 
 
 const getAllPending = async(req,res) =>{
+    let pending_leaves={}
 
-    const pending_leaves = await Leave.find({approvedstatus:0});
-
+    pending_leaves = await Leave.find({approvedstatus:0});
+    // let userIds = pending_leaves.map((i)=>(i.userId));
+    // console.log(pending_leaves);
+    // for(let i=0;i<pending_leaves.length;i++){
+    //     pending_leaves[i]['user']=await Employe.findById(pending_leaves[i].userId);
+    // }
+    // console.log(pending_leaves);
     if(pending_leaves){
-        return res.json({pending_leaves});
+        return res.json(pending_leaves);
     }else{
         return res.status(400).json({err:"Error to get all pending leaves"})
     }
@@ -55,9 +64,8 @@ const getAllPending = async(req,res) =>{
 
 const leaveApproval = async(req,res) =>{
 
-    const user = await Employe.findById(req.params.id);
+    const leave = await Leave.findById(req.params.id);
 
-    const leave = await Leave.findOne({userId:user._id});
 
     leave.approvedstatus=1;
     await leave.save();
@@ -72,9 +80,9 @@ const leaveApproval = async(req,res) =>{
 
 const leaveRejection = async(req,res) =>{
 
-    const user = await Employe.findById(req.params.id);
+    const leave = await Leave.findById(req.params.id);
 
-    const leave = await Leave.findOne({userId:user._id});
+    //const leave = await Leave.findOne({userId:user._id});
 
     leave.approvedstatus=2;
     await leave.save();
@@ -116,10 +124,20 @@ const get_all_my_leaves = async(req,res) =>{
     }else{
         return res.status(400).json({err:"Error to get all leaves"})
     }
+}
 
+
+const individualLeave=async(req,res)=>{
+    const leave = await Leave.findById(req.params.id);
+    if(leave){
+        let user = await Employe.findById(leave.userId).select("-password");
+       // leave.userDetails = user;
+        return res.json({leave,user})
+    }
+    return res.status(404).json({err:"Leave not found"})
 }
 
 
 
 
-export {addLeave,getAllPending,leaveApproval,leaveRejection,get_all_my_leaves}
+export {addLeave,getAllPending,leaveApproval,leaveRejection,get_all_my_leaves,individualLeave}

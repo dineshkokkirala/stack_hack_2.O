@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const leaveSchema = mongoose.Schema({
     userId:{
         type:mongoose.Types.ObjectId,
@@ -32,6 +33,9 @@ const leaveSchema = mongoose.Schema({
     approvedstatus: {
         type : Number,
         default : 0
+    },
+    username:{
+        type:String
     }   
 },{
     timestamp:true
