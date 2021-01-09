@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import AuthContext from "../context/auth/authContext";
+import React, {  useEffect, useState } from "react";
+// import AuthContext from "../context/auth/authContext";
 
 const Employee = () => {
-  const authContext = useContext(AuthContext);
+  // const authContext = useContext(AuthContext);
 
-  const { loaduser, isAuthenticated } = authContext;
+  // const { loaduser, isAuthenticated } = authContext;
   
   const [employee,setEmployee] = useState({error:"",loading:false,user:null});
   const [changePasswords,setChangePasswords] = useState({
@@ -19,7 +19,7 @@ const Employee = () => {
   const changeHandler = (e)=>{
     setChangePasswords({...changePasswords,[e.target.name]:e.target.value})
   }
-  const {error,loading,user}=employee;
+  const {loading,user}=employee;
 
   const changingPasswords = (input_fields)=>{
     let token = JSON.parse(localStorage.getItem("token2")).token;
@@ -126,6 +126,7 @@ const Employee = () => {
         })
       }
     })
+    // eslint-disable-next-line
   }, []);
 
   return (

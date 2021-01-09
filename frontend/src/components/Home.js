@@ -1,9 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 import "./Home.css";
 // import AuthContext from "../context/auth/authContext";
-import axios from "axios";
-import Employee from "./Employee";
-import { Redirect } from "react-router-dom";
+// import Employee from "./Employee";
+// import { Redirect } from "react-router-dom";
 
 const Home = (props) => {
   function myFunc1() {
@@ -94,8 +93,8 @@ const Home = (props) => {
     didRedirect2: false,
     success2: false,
   });
-  const { email, password, error, loading, didRedirect } = employee;
-  const { email2, password2, error2, loading2, didRedirect2 } = employee2;
+  const { email, password, error,  didRedirect } = employee;
+  const { email2, password2, error2,  didRedirect2 } = employee2;
   const changeHandler = (e) => {
     setEmployee({ ...employee, [e.target.name]: e.target.value });
   };

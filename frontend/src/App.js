@@ -3,13 +3,13 @@ import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import AuthState from "./context/auth/AuthState";
 import Admin from "./components/Admin";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import setAuthToken from "./utils/setAuthToken";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+// import setAuthToken from "./utils/setAuthToken";
 import AddEmploye from "./components/AddEmploye";
 import Employee from "./components/Employee";
 import PrivateRoute from "./components/PrivateRoute";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
-import { isadmin_true } from "./authHelpers";
+// import { isadmin_true } from "./authHelpers";
 import GetEmployee from "./components/GetEmployee"
 import AddLeave from "./components/AddLeave";
 import MyLeaves from "./components/MyLeaves";

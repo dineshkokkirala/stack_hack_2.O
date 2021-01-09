@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, Redirect, withRouter } from "react-router-dom";
-import { isadmin_true } from "../authHelpers";
-import AuthContext from "../context/auth/authContext";
+import React, {  useEffect, useState } from "react";
+import {  withRouter } from "react-router-dom";
+// import { isadmin_true } from "../authHelpers";
+// import AuthContext from "../context/auth/authContext";
 import Spinner from "./Spinner";
 import "./Admin.css"
 
 const Admin = (props) => {
-  const authContext = useContext(AuthContext);
+  // const authContext = useContext(AuthContext);
  
 
-  const { loaduser, isAuthenticated } = authContext;
+  // const { loaduser, isAuthenticated } = authContext;
   const [employees,setEmployees]=useState({error:"",all:null,loading:false});
 
   const getAllEmployees = () =>{
@@ -81,7 +81,7 @@ const Admin = (props) => {
     }).catch((err)=>{
       console.log(err)
     })
-    
+    // eslint-disable-next-line
   }, [employees.loading]);
 
   
@@ -123,7 +123,7 @@ const Admin = (props) => {
               <div key={emp._id} className="col-12 col-md-4 col-lg-3">
                   <div className="card text-center shadow m-2 p-2 bg-danger text-white" >
                     <div className="col-12">
-                      <img src={emp.photo} style={{borderRadius:"50%",height:"100px",width:"100px"}} />
+                      <img src={emp.photo} style={{borderRadius:"50%",height:"100px",width:"100px"}} alt="image_of" />
                     </div>
                     <div className="col-12 mt-3">
                       {emp.employeid}

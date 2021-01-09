@@ -4,13 +4,12 @@ import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
 import authReducer from "./authReducer.js";
 import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
+
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT,
+
   AUTH_ERROR,
-  CLEAR_ERRORS,
+
   USER_LOADED,
 } from "../types";
 

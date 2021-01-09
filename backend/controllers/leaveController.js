@@ -113,7 +113,6 @@ const leaveRejection = async(req,res) =>{
 //     }else{
 //         return res.status(400).json({err:"Error to get my approved leaves"})
 //     }
-
 // }
 
 const get_all_my_leaves = async(req,res) =>{

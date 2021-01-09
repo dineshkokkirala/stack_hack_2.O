@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import  no_pending from "../assets/no_pending.jpg"
 
 const PendingLeaves = (props) => {
 
@@ -12,7 +13,7 @@ const PendingLeaves = (props) => {
 
     // const [leaves,setLeaves]=useState([]);
 
-    const {p_leaves,error,loading,modal,pending_leave} = pending;
+    const {p_leaves,loading,pending_leave} = pending;
 
     const getPendingLeaves = ()=>{
         let token = JSON.parse(localStorage.getItem("token")).token;
@@ -48,6 +49,7 @@ const PendingLeaves = (props) => {
                 })
             }
         })
+        // eslint-disable-next-line
     },[loading])
 
 
@@ -145,12 +147,21 @@ const PendingLeaves = (props) => {
             {/* {modalView()} */}
             <div className="container">
                 <div className="row">
-                    <div className="col-12 col-md-6">
+                    <div className="col-12">
                         <h3>Pending Leaves</h3>
+                        {
+                           (p_leaves&&p_leaves.length===0)&&(
+                                <div>
+                                    <h1>No Pending Leaves.......</h1>
+                                    <img src={no_pending} width="300px" alt="no-pending"  />
+                                </div>
+                            )
+                        }
+                        
                         {
                             (p_leaves&&loading)?(
                                 p_leaves.map((l)=>(
-                                    <div className="card shadow p-3 mb-3" style={{backgroundColor:l.leavetype==="Emergency"?"red":""}}> 
+                                    <div key={l._id} className="card shadow p-3 mb-3" style={{backgroundColor:l.leavetype==="Emergency"?"red":""}}> 
                                          <div className="row">
                                             <div className="col-6 col-md-6">
                                                 <h5>{l.username}</h5>
@@ -160,7 +171,7 @@ const PendingLeaves = (props) => {
                                                     <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn-primary" onClick={()=>getLeave(l._id)}>View</button>
                                                 </h6>
                                                 {(pending_leave)&&(
-                                                    <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div className="modal-dialog">
                                                         <div className="modal-content">
                                                         <div className="modal-header">

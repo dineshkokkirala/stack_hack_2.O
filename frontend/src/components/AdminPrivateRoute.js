@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import AuthContext from "../context/auth/authContext";
+// import AuthContext from "../context/auth/authContext";
 import {isadmin_true,isAuthenticated_true} from "../authHelpers/index"
 
 const AdminPrivateRoute = ({ component: Component, ...rest }) => {
-  const authContext = useContext(AuthContext);
+  // const authContext = useContext(AuthContext);
 
-  const { isAuthenticated, loading, isadmin } = authContext;
+  // const { isAuthenticated, loading, isadmin } = authContext;
 
   return (
     <Route

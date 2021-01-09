@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import image2 from "../assets/image2.png";
 import { Link,withRouter } from "react-router-dom";
 import { isadmin_true, isAuthenticated_true,logout } from "../authHelpers";
@@ -45,7 +45,7 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link onClick={logout} className="nav-link">
+                    <Link to="/" onClick={logout} className="nav-link">
                       Logout
                     </Link>
                   </li>
@@ -66,7 +66,7 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link onClick={logout} className="nav-link">
+                    <Link to="/" onClick={logout} className="nav-link">
                       Logout
                     </Link>
                   </li>
