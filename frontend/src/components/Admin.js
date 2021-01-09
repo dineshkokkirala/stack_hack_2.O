@@ -3,7 +3,7 @@ import { Link, Redirect, withRouter } from "react-router-dom";
 import { isadmin_true } from "../authHelpers";
 import AuthContext from "../context/auth/authContext";
 import Spinner from "./Spinner";
-
+import "./Admin.css"
 
 const Admin = (props) => {
   const authContext = useContext(AuthContext);
@@ -134,7 +134,7 @@ const Admin = (props) => {
                     <div className="col-12">
                       {emp.worktype}
                     </div>
-                    <button className="btn btn-info" onClick={()=>{getEmploye(emp._id)}}>View</button>
+                    <button className="btn btn-info emp_btn" onClick={()=>{getEmploye(emp._id)}}>View</button>
                   </div>
               </div>
             ))

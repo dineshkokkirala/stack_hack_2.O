@@ -15,16 +15,15 @@ const leaveSchema = mongoose.Schema({
         required:true
     },
     fromdate:{
-        type:Date,
+        type:String,
         required:true
     },
     todate:{
-        type:Date,
+        type:String,
         required:true
     },
     noofdays:{
-        type:Number,
-        required:true
+        type:Number
     },
     periodtype:{
         type:String,

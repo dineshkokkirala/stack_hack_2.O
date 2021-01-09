@@ -39,12 +39,27 @@ const Navbar = () => {
                       Add Employee
                     </Link>
                   </li>
+                  <li>
+                    <Link onClick={logout} className="nav-link">
+                      Logout
+                    </Link>
+                  </li>
               </ul>
               )
             }
              {
-              isAuthenticated_true() && (
+              (isAuthenticated_true()&&!isadmin_true()) && (
                 <ul className="navbar-nav">
+                  <li>
+                    <Link to="/my_leaves" className="nav-link">
+                      My Leaves
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/apply_leave" className="nav-link">
+                      Apply Leave
+                    </Link>
+                  </li>
                   <li>
                     <Link onClick={logout} className="nav-link">
                       Logout

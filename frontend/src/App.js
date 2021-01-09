@@ -11,14 +11,10 @@ import PrivateRoute from "./components/PrivateRoute";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
 import { isadmin_true } from "./authHelpers";
 import GetEmployee from "./components/GetEmployee"
-// if (localStorage.token) {
-//   // console.log(localStorage.token);
-//   setAuthToken(localStorage.token);
-// }
-// if (localStorage.token2) {
-//   // console.log(localStorage.token);
-//   setAuthToken(localStorage.token2);
-// }
+import AddLeave from "./components/AddLeave";
+import MyLeaves from "./components/MyLeaves";
+
+
 
 const App = () => {
   return (
@@ -31,6 +27,8 @@ const App = () => {
           <AdminPrivateRoute exact path="/add" component={AddEmploye} />
           <AdminPrivateRoute exact path="/getEmployee" component={GetEmployee} />
           <PrivateRoute exact path="/employee" component={Employee} />
+          <PrivateRoute exact path="/apply_leave" component={AddLeave} />
+          <PrivateRoute exact path="/my_leaves" component={MyLeaves} />
         </Switch>
       </BrowserRouter>
     </AuthState>

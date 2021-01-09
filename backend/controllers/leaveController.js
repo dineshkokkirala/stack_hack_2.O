@@ -2,19 +2,22 @@ import Employe from "../models/employeModel.js";
 import Leave from "../models/leaveModel.js";
 
 const addLeave = async(req,res) =>{
-    const {leavetype,reason,fromdate,todate,noofdays,periodtype}  = req.body;
-    if(!leavetype||!reason||!fromdate||!todate||!noofdays||!periodtype){
+    const {leavetype,reason,fromdate,todate,periodtype}  = req.body;
+    if(!leavetype||!reason||!fromdate||!todate||!periodtype){
         return res.status(400).json({err:"Please fill all fields"})
     }
 
     const userId = req.user.id;
+    const from_date_modified = fromdate.split("-");
+    const to_date_modified = todate.split("-");
+    const final_from = from_date_modified[2]+"-"+from_date_modified[1]+"-"+from_date_modified[0];
+    const final_to = to_date_modified[2]+"-"+to_date_modified[1]+"-"+to_date_modified[0];
     const leave = await Leave.create({
         userId,
         leavetype,
         reason,
-        fromdate,
-        todate,
-        noofdays,
+        fromdate:final_from,
+        todate:final_to,
         periodtype
     })
     
@@ -25,7 +28,6 @@ const addLeave = async(req,res) =>{
             reason:leave.reason,
             fromdate:leave.fromdate,
             todate:leave.todate,
-            noofdays:leave.noofdays,
             periodtype:leave.periodtype,
             approvedstatus:leave.approvedstatus
         })
