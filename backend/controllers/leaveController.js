@@ -1,6 +1,11 @@
 import Employe from "../models/employeModel.js";
 import Leave from "../models/leaveModel.js";
 
+
+//  Route   -   /api/leave/addleave
+//  Desc    -   Apply Leave
+//  Access  -   Private (Employee)
+//  Method  -   POST
 const addLeave = async(req,res) =>{
     const {leavetype,reason,fromdate,todate,periodtype}  = req.body;
     if(!leavetype||!reason||!fromdate||!todate||!periodtype){
@@ -42,17 +47,13 @@ const addLeave = async(req,res) =>{
 
 }
 
-
+//  Route   -   /api/leave/pending_all
+//  Descc   -   Get all pending leaves to admin
+//  Access  -   Private (Admin)
+//  Method  -   GET
 const getAllPending = async(req,res) =>{
     let pending_leaves={}
-
     pending_leaves = await Leave.find({approvedstatus:0});
-    // let userIds = pending_leaves.map((i)=>(i.userId));
-    // console.log(pending_leaves);
-    // for(let i=0;i<pending_leaves.length;i++){
-    //     pending_leaves[i]['user']=await Employe.findById(pending_leaves[i].userId);
-    // }
-    // console.log(pending_leaves);
     if(pending_leaves){
         return res.json(pending_leaves);
     }else{
@@ -61,15 +62,14 @@ const getAllPending = async(req,res) =>{
 
 }
 
-
+//  Route   -   /api/leave/approve/${leaveID}
+//  Desc    -   Approving Employee Leave
+//  Private -   Private (Admin)
+// Method   -   POST
 const leaveApproval = async(req,res) =>{
-
     const leave = await Leave.findById(req.params.id);
-
-
     leave.approvedstatus=1;
     await leave.save();
-
     if(leave.approvedstatus===1){
         return res.json(leave);
     }else{
@@ -78,12 +78,12 @@ const leaveApproval = async(req,res) =>{
 
 }
 
+//  Route   -   /api/leave/reject/${leaveID}
+//  Desc    -   Rejecting Employee Leave
+//  Private -   Private (Admin)
+//  Method  -   POST
 const leaveRejection = async(req,res) =>{
-
     const leave = await Leave.findById(req.params.id);
-
-    //const leave = await Leave.findOne({userId:user._id});
-
     leave.approvedstatus=2;
     await leave.save();
 
@@ -95,26 +95,10 @@ const leaveRejection = async(req,res) =>{
 
 }
 
-
-// const my_leaves_pending = async(req,res) =>{
-
-//     const my_pending = await Leave.find({userId:req.user._id,approvedstatus:0})
-//     if(my_pending){
-//         return res.json(my_pending)
-//     }else{
-//         return res.status(400).json({err:"Error to get my pending leaves"})
-//     }
-// }
-// const my_leaves_approved = async(req,res) =>{
-
-//     const my_pending = await Leave.find({userId:req.user._id,approvedstatus:1})
-//     if(my_pending){
-//         return res.json(my_pending)
-//     }else{
-//         return res.status(400).json({err:"Error to get my approved leaves"})
-//     }
-// }
-
+//  Route   -   /api/leave/my_leaves
+//  Desc    -   Get all Employee leaves
+//  Private -   Private (Employee)
+//  Method  -   GET
 const get_all_my_leaves = async(req,res) =>{
 
     const leaves = await Leave.find({userId:req.user._id});
@@ -125,7 +109,10 @@ const get_all_my_leaves = async(req,res) =>{
     }
 }
 
-
+//  Route   -   /api/leave/${leave_id}
+//  Desc    -   Get Leave by ID
+//  Private -   Private (Admin)
+//  Method  -   GET
 const individualLeave=async(req,res)=>{
     const leave = await Leave.findById(req.params.id);
     if(leave){

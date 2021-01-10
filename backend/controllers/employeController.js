@@ -3,11 +3,11 @@ import bcryptjs from "bcryptjs";
 import generateToken from "../utils/generateToken.js";
 import gravatar from "gravatar";
 
-// route POST /api/admin/add
-// access   Private(only admin)
-// desc     Adding employe
+//  Route   -   /api/admin/add
+//  Desc    -   Adding Employee by Admin
+//  Access  -   Private (Admin)
+//  Method  -   POST
 const addEmploye = async (req, res) => {
-  //res.send("Adding Employe...");
   const {
     username,
     firstname,
@@ -66,7 +66,6 @@ const addEmploye = async (req, res) => {
   });
 
   let username_id_string = username;
-  //console.log(emp_id[0]);
   let contact_number_first_three_digits = contactnumber.slice(0, 3);
   let employe_id = username_id_string + contact_number_first_three_digits;
 
@@ -109,6 +108,11 @@ const addEmploye = async (req, res) => {
   }
 };
 
+
+//  Route   -   /api/admin/all
+//  Desc    -   Get all Employees
+//  Access  -   Private (Admin)
+//  Method  -   GET
 const displayEmployee = async (req, res) => {
   const all = await Employe.find({isadmin:false});
 
@@ -119,6 +123,11 @@ const displayEmployee = async (req, res) => {
   }
 };
 
+
+//  Route   -   /api/admin/${employe_id}
+//  Desc    -   Get Employee Details
+//  Access  -   Private (Employee)
+//  Method  -   GET
 const getEmployeeDetails = async(req,res) =>{
   const employee = await Employe.findById(req.params.id)
   if(employee){
@@ -128,6 +137,10 @@ const getEmployeeDetails = async(req,res) =>{
   }
 }
 
+//  Route   -   /api/admin/change/${employe_id}
+//  Desc    -   Change Employe Password
+//  Access  -   Private (Employee)
+//  Method  -   POST
 const changePassword = async(req,res)=>{
   const user = await Employe.findById(req.params.id);
   const {old_password,new_password,confirm_password} = req.body;

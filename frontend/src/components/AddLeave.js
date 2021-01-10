@@ -37,7 +37,6 @@ const AddLeave = (props) => {
 
     const submitHandler =(e)=>{
         e.preventDefault();
-        //console.log(leave);
         const leave_data = {
             leavetype:leave_type,
             reason,

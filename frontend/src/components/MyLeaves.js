@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import Spinner from './Spinner';
 
 const MyLeaves = () => {
 
     const [myLeaves,setMyLeaves] = useState({loading:false,error:"",leaves:null});
    
-
     const getMyLeaves = () =>{
         let token = JSON.parse(localStorage.getItem("token2")).token;
         return fetch("http://localhost:5000/api/leave/my_leaves",{
@@ -79,7 +79,7 @@ const MyLeaves = () => {
                             ))
                             
                         ):(
-                            <p>Loading..</p>
+                            <Spinner />
                         )
                     }
                 </div>

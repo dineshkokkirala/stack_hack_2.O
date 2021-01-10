@@ -1,17 +1,12 @@
 import React, {  useEffect, useState } from "react";
 import {  withRouter } from "react-router-dom";
-// import { isadmin_true } from "../authHelpers";
-// import AuthContext from "../context/auth/authContext";
 import Spinner from "./Spinner";
 import "./Admin.css"
 
 const Admin = (props) => {
-  // const authContext = useContext(AuthContext);
- 
-
-  // const { loaduser, isAuthenticated } = authContext;
   const [employees,setEmployees]=useState({error:"",all:null,loading:false});
   const [search, setSearch]=useState("");
+  const [category,setCategory]=useState([]);
 
   const getAllEmployees = () =>{
     let token = JSON.parse(localStorage.token).token;
@@ -43,9 +38,7 @@ const Admin = (props) => {
   }
 
   const getEmploye =(id)=>{
-    //console.log(id)
     getEmployeeFullDetails(id).then((data)=>{
-     // console.log(data)
       if(data.err){
         setEmployees({
           ...employees,
@@ -57,13 +50,26 @@ const Admin = (props) => {
     })
   }
 
+  const searchHandler=(e)=>{
+      if(e.target.checked){
+      
+      setCategory([...category, e.target.value])
+      }
+      else{
+        const index = category.indexOf(e.target.value);
+        if (index > -1) {
+          category.splice(index, 1);
+        }
+         setCategory(category);
+      }
+      console.log(category);
+  }
+
 
 
  
   useEffect(() => {
-    // loaduser();
     getAllEmployees().then((data)=>{
-      // console.log(data)
       if(data.err){
        setEmployees({
         ...employees,
@@ -91,47 +97,45 @@ const Admin = (props) => {
 
   return (
     <div className="container" style={{ marginTop: "20px" }}>
-      {/* <table className="table">
-        <thead className="thead table-dark">
-          <tr>
-            <th scope="col">Employee Id</th>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">Preview</th>
-          </tr>
-        </thead>
-        <tbody>    
-        {employees.all && employees.loading ? (
-          employees.all.map((emp) => (
-            <tr key={emp._id}>
-              <th scope="row">{emp.employeid}</th>
-              <td>{emp.username}</td>
-              <td>{emp.email}</td>
-              <td>
-                <button className="btn btn-info" onClick={()=>{getEmploye(emp._id)}}>View</button>
-              </td>
-            </tr>
-          ))
-        ):(
-          <Spinner />
-        )
-        }
-        </tbody>
-      </table> */}
       <div className="row">
-      {/* <div className="col-12 col-md-6">
+      <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="username" onChange={searchHandler}  />
+    <label class="form-check-label" for="flexCheckChecked">
+    Username
+    </label>
+      </div>
+      <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="email" onChange={searchHandler}  />
+      <label class="form-check-label" for="flexCheckChecked">
+      Email
+      </label>
+    </div>
+    <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="role" onChange={searchHandler}   />
+  <label class="form-check-label" for="flexCheckChecked">
+    role
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="department" onChange={searchHandler}  />
+  <label class="form-check-label" for="flexCheckChecked">
+    department
+  </label>
+</div>
+      
+      <div className="col-12 col-md-6">
                             
       <select
       className="form-select"
-      onChange={(e)=>setCatego}
+      onChange={(e)=>setCategory(e.target.value)}
       >
-        <option selected>Choose...</option>
-        <option value="Official">Official</option>
-        <option value="Personal">Personal</option>
-        <option value="Emergency">Emergency</option>
-        <option value="Other">Other</option>
+        <option selected>Select Category...</option>
+        <option value="username">username</option>
+        <option value="email">email</option>
+        <option value="department">department</option>
+        <option value="role">role</option>
       </select>
-      </div> */}
+      </div>
           <div className="col-12 mb-4">
                 <input
                   type="text"
@@ -146,7 +150,7 @@ const Admin = (props) => {
               if(search===""){
                 return val;
               }
-              else if(val.username.toLowerCase().includes(search.toLowerCase())||val.email.toLowerCase().includes(search.toLowerCase())||val.department.toLowerCase().includes(search.toLowerCase())||val.role.toLowerCase().includes(search.toLowerCase())){
+              else if(val.username.toLowerCase().includes(search.toLowerCase())){
                 return val;
               }
               return null

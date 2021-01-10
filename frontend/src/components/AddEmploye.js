@@ -64,7 +64,6 @@ const AddEmploye = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-   // console.log(employee);
     const input_data = {
       firstname,
       lastname,
@@ -83,10 +82,8 @@ const AddEmploye = (props) => {
       worktype,
       joiningdate,
     } 
-    //console.log(input_data)
     addEmployee(input_data)
     .then((data)=>{
-      //console.log(data)
       if(data.err){
         setEmployee({
           ...employee,

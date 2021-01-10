@@ -2,11 +2,15 @@ import Employe from "../models/employeModel.js";
 import bcryptjs from "bcryptjs";
 import generateToken from "../utils/generateToken.js";
 
+
+
+//  Route -  /api/users/login
+//  Desc    -   Login as Employee or as Admin
+//  Access  -   Public
+//  Method  -   POST
 const userLogin = async (req, res) => {
   const { email, password } = req.body;
-  //console.log(email);
   const user = await Employe.findOne({ email });
-  //console.log(user);
   if (!user) {
     return res.status(400).json({ msg: "Invalid Credentials" });
   }
@@ -26,9 +30,12 @@ const userLogin = async (req, res) => {
   }
 };
 
+//  Route   -   /api/users/profile
+//  Desc    -   Get a profile of user
+//  Access  -   Private (Employee)
+//  Method  -   GET
 const getUserProfile = async (req, res) => {
   const user = await Employe.findById(req.user._id);
-
   if (user) {
     return res.json({
       _id: user._id,

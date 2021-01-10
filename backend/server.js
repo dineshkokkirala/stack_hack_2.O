@@ -13,11 +13,7 @@ const app = express();
 // PORT
 const PORT = process.env.PORT;
 
-//DB Connection
-// &w=majorityt
 //URI = "mongodb+srv://stackhack:Stackhack123456@stackhack.hrj84.mongodb.net/stackhack?retryWrites=true&w=majority"
-//URI = mongodb://localhost:27017/hr_management
-
 // DataBase Connection
 dbConnection();
 

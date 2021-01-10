@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import  no_pending from "../assets/no_pending.jpg"
+import Spinner from './Spinner';
 
 const PendingLeaves = (props) => {
 
@@ -10,8 +11,6 @@ const PendingLeaves = (props) => {
         modal:false,
         pending_leave:null
     });
-
-    // const [leaves,setLeaves]=useState([]);
 
     const {p_leaves,loading,pending_leave} = pending;
 
@@ -30,9 +29,6 @@ const PendingLeaves = (props) => {
     }
 
     useEffect(()=>{
-        // p_leaves && p_leaves.map((l) => {
-        //     setLeaves([...leaves,getLeaveDetail(l._id)])
-        // })
         getPendingLeaves().then((data)=>{
             if(data.err){
                 setPending({
@@ -41,7 +37,6 @@ const PendingLeaves = (props) => {
                     loading:true
                 })
             }else{
-                //console.log(data)
                 setPending({
                     ...pending,
                     loading:true,
@@ -69,11 +64,9 @@ const PendingLeaves = (props) => {
 
     const getLeave=(id)=>{
         getLeaveDetail(id).then((data)=>{
-            //console.log(data)
             if(data.err){
                console.log(data.err)
             }else{
-                //props.history.push("/getLeave",data)
                 setPending({
                     ...pending,
                     modal:true,
@@ -107,7 +100,6 @@ const PendingLeaves = (props) => {
                     loading:true
                 })
             }else{
-               // console.log(data)
                 props.history.push("/admin")
             }
         })
@@ -136,7 +128,6 @@ const PendingLeaves = (props) => {
                     loading:true
                 })
             }else{
-               // console.log(data)
                 props.history.push("/admin")
             }
         })
@@ -144,7 +135,6 @@ const PendingLeaves = (props) => {
 
     return (
         <div>
-            {/* {modalView()} */}
             <div className="container">
                 <div className="row">
                     <div className="col-12">
@@ -206,7 +196,7 @@ const PendingLeaves = (props) => {
                                 ))
                                 
                             ):(
-                                <p>Loading...</p>
+                                <Spinner />
                             )
                         }
                     </div>

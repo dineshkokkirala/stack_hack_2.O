@@ -1,11 +1,7 @@
 import React, {  useEffect, useState } from "react";
-// import AuthContext from "../context/auth/authContext";
+import Spinner from "./Spinner";
 
-const Employee = () => {
-  // const authContext = useContext(AuthContext);
-
-  // const { loaduser, isAuthenticated } = authContext;
-  
+const Employee = () => {  
   const [employee,setEmployee] = useState({error:"",loading:false,user:null});
   const [changePasswords,setChangePasswords] = useState({
     old_password:"",
@@ -45,12 +41,10 @@ const Employee = () => {
       new_password,
       confirm_password
     }
-    //console.log(input_data)
     changingPasswords(input_data).then((data)=>{
       if(data.err){
         setChangePasswords({...changePasswords,error2:data.err})
       }else{
-        //console.log(data);
         setChangePasswords({
           ...changePasswords,
           error2:"",
@@ -66,6 +60,19 @@ const Employee = () => {
       success:""
     })
   }
+
+  // function myFunc1() {
+  //   var x = document.getElementById("pass");
+
+  //   var y = document.getElementById("show");
+  //   if (x.type === "password") {
+  //     y.className = "fa-eye fas img";
+  //     x.type = "text";
+  //   } else {
+  //     y.className = "fa-eye-slash fas img";
+  //     x.type = "password";
+  //   }
+  // }
 
 
   const getEmployee = (id) =>{
@@ -118,7 +125,6 @@ const Employee = () => {
         loading:true
        })
       }else{
-        //console.log(data)
         setEmployee({
           ...employee,
           user:data,
@@ -146,7 +152,10 @@ const Employee = () => {
                   {successMessage()}
                     <form className="form-group" onSubmit={submitHandler}>
                         <label className="form-label"><h5>Change your password</h5></label>
-                        <input type="text" placeholder="Old Password" name="old_password" value={old_password} onChange={changeHandler} className="form-control mb-2" />
+                        <div className="form-group div2">
+                          <i className="fa-eye-slash fas img" id="show1" style={{ cursor: "pointer" }}></i>
+                          <input type="text" placeholder="Old Password" name="old_password" value={old_password} onChange={changeHandler} className="form-control mb-2" />
+                        </div>
                         <input type="password" placeholder="New Password" name="new_password" value={new_password} onChange={changeHandler} className="form-control mb-2" />
                         <input type="text" placeholder="Confirm Password" name="confirm_password" value={confirm_password} onChange={changeHandler} className="form-control mb-3" />
                         <button className="btn w-100 btn-success">Change Password</button>
@@ -224,7 +233,7 @@ const Employee = () => {
         </div>
     </div>
       ):(
-        <p>Loading...</p>
+        <Spinner />
       )}
     </div>
   );

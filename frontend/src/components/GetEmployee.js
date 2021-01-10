@@ -1,10 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-
 const GetEmployee = (props) => {
     const data = props.location.state;
-    //console.log(data)
     return (
         <div className="container mt-4">
             <div className="row">

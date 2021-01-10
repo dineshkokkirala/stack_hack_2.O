@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import "./Home.css";
-// import AuthContext from "../context/auth/authContext";
-// import Employee from "./Employee";
-// import { Redirect } from "react-router-dom";
 
 const Home = (props) => {
   function myFunc1() {
@@ -30,53 +27,6 @@ const Home = (props) => {
     }
   }
 
-  // const authContext = useContext(AuthContext);
-
-  // const { login, isAuthenticated, error, isadmin, employeLogin } = authContext;
-
-  // useEffect(() => {
-  //   //console.log(isAuthenticated, isadmin);
-  //   if (isAuthenticated && isadmin) {
-  //     props.history.push("/admin");
-  //   } else if (isAuthenticated && !isadmin) {
-  //     props.history.push("/employee");
-  //   } else {
-  //     //console.log("nul");
-  //     props.history.push("/");
-  //   }
-  // }, [isAuthenticated, props.history, isadmin]);
-
-  // const initialState = {
-  //   email: "",
-  //   password: "",
-  // };
-
-  // const [user, setUser] = useState(initialState);
-
-  // const [employe, setEmploye] = useState(initialState);
-
-  // const { email, password } = user;
-
-  // const changeHandler = (e) => {
-  //   setUser({ ...user, [e.target.name]: e.target.value });
-  // };
-
-  // const employeChangeHandler = (e) => {
-  //   setEmploye({ ...employe, [e.target.name]: e.target.value });
-  // };
-
-  // const adminSubmitHandler = (e) => {
-  //   e.preventDefault();
-  //   //console.log(user);
-  //   login(user);
-  //   setUser(initialState);
-  // };
-
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   employeLogin(employe);
-  //   setEmploye(initialState);
-  // };
   const [employee, setEmployee] = useState({
     email: "",
     password: "",
@@ -129,7 +79,6 @@ const Home = (props) => {
   };
 
   const authenticate2 = (data) => {
-    //console.log(data)
     if (typeof window !== "undefined") {
       localStorage.setItem("token2", JSON.stringify(data));
       setEmployee2({
@@ -157,9 +106,6 @@ const Home = (props) => {
     e.preventDefault();
     setEmployee({ ...employee, error: false, loading: true });
     const adminDetails = { email, password };
-    //console.log(adminDetails)
-    //  const indata =  elogin(adminDetails)
-    // console.log(indata)
     elogin(adminDetails)
       .then((data) => {
         if (data.msg) {
@@ -168,7 +114,6 @@ const Home = (props) => {
             error: data.msg,
             loading: false,
           });
-          //console.log(employee);
         } else {
           const admin_and_token = {
             isadmin: data.isadmin,
@@ -176,7 +121,6 @@ const Home = (props) => {
             userId:data._id,
             username:data.username
           };
-          //console.log(admin_and_token);
           if(data.isadmin)
           authenticate(admin_and_token);
           else{
@@ -187,7 +131,6 @@ const Home = (props) => {
             })
           }
         }
-        //console.log(employee);
       })
       .catch(() => console.log("Login failed"));
 
@@ -205,9 +148,6 @@ const Home = (props) => {
     e.preventDefault();
     setEmployee2({ ...employee2, error2: false, loading2: true });
     const employeDetails = { email:email2, password:password2 };
-   // console.log(employee2)
-    //  const indata =  elogin(adminDetails)
-    // console.log(indata)
     elogin(employeDetails)
       .then((data) => {
         if (data.msg) {
@@ -216,7 +156,6 @@ const Home = (props) => {
             error2: data.msg,
             loading2: false,
           });
-          //console.log(employee);
         } else {
           const admin_and_token = {
             isadmin: data.isadmin,
@@ -224,8 +163,7 @@ const Home = (props) => {
             userId:data._id,
             username:data.username
           };
-         // console.log(admin_and_token);
-           if(!data.isadmin)
+          if(!data.isadmin)
           authenticate2(admin_and_token);
           else{
             setEmployee2({
@@ -235,7 +173,6 @@ const Home = (props) => {
             })
           }
         }
-        //console.log(employee);
       })
       .catch(() => console.log("Login failed"));
 
@@ -251,9 +188,7 @@ const Home = (props) => {
 
   const performRedirect = () => {
     if (didRedirect) {
-      //console.log(employee);
       const bool = isAuthenticated_true();
-      // console.log(bool);
       if (bool && bool.isadmin) {
         props.history.push("/admin");
       } else {
@@ -263,9 +198,7 @@ const Home = (props) => {
   };
   const performRedirect2 = () => {
     if (didRedirect2) {
-      //console.log(employee);
       const bool = isAuthenticated_true();
-      // console.log(bool);
       if (bool && bool.isadmin) {
         props.history.push("/admin");
       } else {
