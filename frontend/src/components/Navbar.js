@@ -35,6 +35,11 @@ const Navbar = () => {
               isadmin_true() && (
                 <ul className="navbar-nav">
                   <li>
+                    <p className="nav-link">
+                      Hello {JSON.parse(localStorage.getItem("token")).username}
+                    </p>
+                  </li>
+                  <li>
                     <Link to="/pending_leaves" className="nav-link">
                       Leave Management
                     </Link>
@@ -55,6 +60,11 @@ const Navbar = () => {
              {
               (isAuthenticated_true()&&!isadmin_true()) && (
                 <ul className="navbar-nav">
+                  <li>
+                    <p className="nav-link">
+                      Hello {JSON.parse(localStorage.getItem("token2")).username}
+                    </p>
+                  </li>
                   <li>
                     <Link to="/my_leaves" className="nav-link">
                       My Leaves

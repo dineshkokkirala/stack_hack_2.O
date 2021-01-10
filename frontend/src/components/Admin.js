@@ -11,6 +11,7 @@ const Admin = (props) => {
 
   // const { loaduser, isAuthenticated } = authContext;
   const [employees,setEmployees]=useState({error:"",all:null,loading:false});
+  const [search, setSearch]=useState("");
 
   const getAllEmployees = () =>{
     let token = JSON.parse(localStorage.token).token;
@@ -118,8 +119,39 @@ const Admin = (props) => {
         </tbody>
       </table> */}
       <div className="row">
+      {/* <div className="col-12 col-md-6">
+                            
+      <select
+      className="form-select"
+      onChange={(e)=>setCatego}
+      >
+        <option selected>Choose...</option>
+        <option value="Official">Official</option>
+        <option value="Personal">Personal</option>
+        <option value="Emergency">Emergency</option>
+        <option value="Other">Other</option>
+      </select>
+      </div> */}
+          <div className="col-12 mb-4">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputAddress"
+                  placeholder="Search Employees by Username, Email, Department, Role"
+                  onChange={(e)=>setSearch(e.target.value)}
+                />
+          </div>
         {employees.all && employees.loading ? (
-            employees.all.map((emp) => (
+            employees.all.filter((val)=>{
+              if(search===""){
+                return val;
+              }
+              else if(val.username.toLowerCase().includes(search.toLowerCase())||val.email.toLowerCase().includes(search.toLowerCase())||val.department.toLowerCase().includes(search.toLowerCase())||val.role.toLowerCase().includes(search.toLowerCase())){
+                return val;
+              }
+              return null
+            }).map((emp) => (
+              
               <div key={emp._id} className="col-12 col-md-4 col-lg-3">
                   <div className="card text-center shadow m-2 p-2 bg-danger text-white" >
                     <div className="col-12">
