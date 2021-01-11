@@ -95,7 +95,7 @@ const AddLeave = (props) => {
                                 value={leave_type}
                                 onChange={changeHandler}
                             >
-                                <option selected>Choose...</option>
+                                <option selected defaultValue="">Choose...</option>
                                 <option value="Official">Official</option>
                                 <option value="Personal">Personal</option>
                                 <option value="Emergency">Emergency</option>

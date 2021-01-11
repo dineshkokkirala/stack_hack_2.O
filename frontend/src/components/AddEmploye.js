@@ -122,7 +122,7 @@ const AddEmploye = (props) => {
         <h1>Add Employee</h1>
         <form className="row g-3" onSubmit={submitHandler}>
           <div className="col-md-6">
-            <label forHtml="firstname" className="form-label">
+            <label htmlFor="firstname" className="form-label">
               Firstname
             </label>
             <input
@@ -136,7 +136,7 @@ const AddEmploye = (props) => {
           </div>
 
           <div className="col-md-6">
-            <label forHtml="lastname" className="form-label">
+            <label htmlFor="lastname" className="form-label">
               Lastname
             </label>
             <input
@@ -150,7 +150,7 @@ const AddEmploye = (props) => {
           </div>
 
           <div className="col-md-6">
-            <label for="inputPassword4" className="form-label">
+            <label htmlFor="inputPassword4" className="form-label">
               Username
             </label>
             <input
@@ -164,7 +164,7 @@ const AddEmploye = (props) => {
           </div>
 
           <div className="col-md-6">
-            <label for="inputPassword4" className="form-label">
+            <label htmlFor="inputPassword4" className="form-label">
               Email
             </label>
             <input
@@ -178,7 +178,7 @@ const AddEmploye = (props) => {
           </div>
 
           <div className="col-md-6">
-            <label for="inputPassword4" className="form-label">
+            <label htmlFor="inputPassword4" className="form-label">
               Gender
             </label>
             <select
@@ -188,7 +188,7 @@ const AddEmploye = (props) => {
               value={gender}
               onChange={changeHandler}
             >
-              <option selected>Choose...</option>
+              <option selected defaultValue="">Choose...</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
@@ -196,7 +196,7 @@ const AddEmploye = (props) => {
           </div>
 
           <div className="col-md-6">
-            <label for="inputPassword4" className="form-label">
+            <label htmlFor="inputPassword4" className="form-label">
               Date of Birth
             </label>
             <input
@@ -210,7 +210,7 @@ const AddEmploye = (props) => {
           </div>
 
           <div className="col-12">
-            <label for="inputAddress" className="form-label">
+            <label htmlFor="inputAddress" className="form-label">
               Address
             </label>
             <input
@@ -225,7 +225,7 @@ const AddEmploye = (props) => {
           </div>
 
           <div className="col-md-6">
-            <label for="inputPassword4" className="form-label">
+            <label htmlFor="inputPassword4" className="form-label">
               Contact no
             </label>
             <input
@@ -239,7 +239,7 @@ const AddEmploye = (props) => {
           </div>
 
           <div className="col-md-6">
-            <label for="inputCity" className="form-label">
+            <label htmlFor="inputCity" className="form-label">
               Marital status
             </label>
             <input
@@ -253,7 +253,7 @@ const AddEmploye = (props) => {
           </div>
 
           <div className="col-md-6">
-            <label for="inputZip" className="form-label">
+            <label htmlFor="inputZip" className="form-label">
               Role
             </label>
             <input
@@ -267,7 +267,7 @@ const AddEmploye = (props) => {
           </div>
 
           <div className="col-md-6">
-            <label for="inputZip" className="form-label">
+            <label htmlFor="inputZip" className="form-label">
               Salary
             </label>
             <input
@@ -281,7 +281,7 @@ const AddEmploye = (props) => {
           </div>
 
           <div className="col-md-6">
-            <label for="inputZip" className="form-label">
+            <label htmlFor="inputZip" className="form-label">
               Blood Group
             </label>
             <input
@@ -295,7 +295,7 @@ const AddEmploye = (props) => {
           </div>
 
           <div className="col-md-6">
-            <label for="inputZip" className="form-label">
+            <label htmlFor="inputZip" className="form-label">
               Nationality
             </label>
             <input
@@ -309,7 +309,7 @@ const AddEmploye = (props) => {
           </div>
 
           <div className="col-md-6">
-            <label for="inputZip" className="form-label">
+            <label htmlFor="inputZip" className="form-label">
               Department
             </label>
             <input
@@ -323,7 +323,7 @@ const AddEmploye = (props) => {
           </div>
 
           <div className="col-md-6">
-            <label for="inputZip" className="form-label">
+            <label htmlFor="inputZip" className="form-label">
               Work type
             </label>
             <input
@@ -337,7 +337,7 @@ const AddEmploye = (props) => {
           </div>
 
           <div className="col-md-6">
-            <label for="inputZip" className="form-label">
+            <label htmlFor="inputZip" className="form-label">
               Joining Date
             </label>
             <input

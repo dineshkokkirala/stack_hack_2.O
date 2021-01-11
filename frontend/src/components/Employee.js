@@ -153,7 +153,7 @@ const Employee = () => {
                     <form className="form-group" onSubmit={submitHandler}>
                         <label className="form-label"><h5>Change your password</h5></label>
                         <div className="form-group div2">
-                          <i className="fa-eye-slash fas img" id="show1" style={{ cursor: "pointer" }}></i>
+                          {/* <i className="fa-eye-slash fas img" id="show1" style={{ cursor: "pointer" }}></i> */}
                           <input type="text" placeholder="Old Password" name="old_password" value={old_password} onChange={changeHandler} className="form-control mb-2" />
                         </div>
                         <input type="password" placeholder="New Password" name="new_password" value={new_password} onChange={changeHandler} className="form-control mb-2" />

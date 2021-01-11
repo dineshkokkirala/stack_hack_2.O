@@ -62,7 +62,7 @@ const Admin = (props) => {
         }
          setCategory(category);
       }
-      console.log(category);
+      //console.log(category);
   }
 
 
@@ -98,45 +98,34 @@ const Admin = (props) => {
   return (
     <div className="container" style={{ marginTop: "20px" }}>
       <div className="row">
-      <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="username" onChange={searchHandler}  />
-    <label class="form-check-label" for="flexCheckChecked">
-    Username
-    </label>
-      </div>
-      <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="email" onChange={searchHandler}  />
-      <label class="form-check-label" for="flexCheckChecked">
-      Email
-      </label>
-    </div>
-    <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="role" onChange={searchHandler}   />
-  <label class="form-check-label" for="flexCheckChecked">
-    role
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" value="department" onChange={searchHandler}  />
-  <label class="form-check-label" for="flexCheckChecked">
-    department
-  </label>
-</div>
-      
-      <div className="col-12 col-md-6">
-                            
-      <select
-      className="form-select"
-      onChange={(e)=>setCategory(e.target.value)}
-      >
-        <option selected>Select Category...</option>
-        <option value="username">username</option>
-        <option value="email">email</option>
-        <option value="department">department</option>
-        <option value="role">role</option>
-      </select>
-      </div>
-          <div className="col-12 mb-4">
+      <div className="card p-4 mb-4">
+        <div className="col-12 d-flex flex-row">
+            <div class="form-check">
+              <input class="form-check-input mr-2" type="checkbox" value="username" onChange={searchHandler}  />
+              <label class="form-check-label" for="flexCheckChecked">
+              Username
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="email" onChange={searchHandler}  />
+              <label class="form-check-label" for="flexCheckChecked">
+              Email
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="role" onChange={searchHandler}   />
+              <label class="form-check-label" for="flexCheckChecked">
+                role
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="department" onChange={searchHandler}  />
+              <label class="form-check-label" for="flexCheckChecked">
+                department
+              </label>
+            </div>
+        </div>
+          <div className="col-12">
                 <input
                   type="text"
                   className="form-control"
@@ -145,14 +134,21 @@ const Admin = (props) => {
                   onChange={(e)=>setSearch(e.target.value)}
                 />
           </div>
+      </div>
+      
+      
         {employees.all && employees.loading ? (
             employees.all.filter((val)=>{
               if(search===""){
                 return val;
               }
-              else if(val.username.toLowerCase().includes(search.toLowerCase())){
+              else{
+                for(var i=0;i<category.length;i++){
+                if(val[category[i]].toLowerCase().includes(search.toLowerCase())){
                 return val;
               }
+            }
+            }
               return null
             }).map((emp) => (
               
