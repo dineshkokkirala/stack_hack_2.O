@@ -20,7 +20,7 @@ const Employee = () => {
   const changingPasswords = (input_fields)=>{
     let token = JSON.parse(localStorage.getItem("token2")).token;
     let userId = JSON.parse(localStorage.getItem("token2")).userId;
-    return fetch(`http://localhost:5000/api/admin/change/${userId}`,{
+    return fetch(`https://hrmanagement369.herokuapp.com/api/admin/change/${userId}`,{
       method:"POST",
       headers:{
         "Content-Type":"application/json",
@@ -77,7 +77,7 @@ const Employee = () => {
 
   const getEmployee = (id) =>{
     let token =JSON.parse(localStorage.getItem("token2")).token;
-    return fetch(`http://localhost:5000/api/admin/${id}`,{
+    return fetch(`https://hrmanagement369.herokuapp.com/api/admin/${id}`,{
       method:"GET",
       headers:{
         "Authorization":token

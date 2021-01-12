@@ -10,7 +10,7 @@ const Admin = (props) => {
 
   const getAllEmployees = () =>{
     let token = JSON.parse(localStorage.token).token;
-    return fetch("http://localhost:5000/api/admin/all",{
+    return fetch("https://hrmanagement369.herokuapp.com/api/admin/all",{
       method:"GET",
       headers:{
         "Authorization":token
@@ -25,7 +25,7 @@ const Admin = (props) => {
 
   const getEmployeeFullDetails = (id) =>{
     let token = JSON.parse(localStorage.getItem("token")).token;
-    return fetch(`http://localhost:5000/api/admin/${id}`,{
+    return fetch(`https://hrmanagement369.herokuapp.com/api/admin/${id}`,{
       method:"GET",
       headers:{
         "Authorization":token
@@ -64,8 +64,6 @@ const Admin = (props) => {
       }
       //console.log(category);
   }
-
-
 
  
   useEffect(() => {

@@ -7,7 +7,7 @@ const MyLeaves = () => {
    
     const getMyLeaves = () =>{
         let token = JSON.parse(localStorage.getItem("token2")).token;
-        return fetch("http://localhost:5000/api/leave/my_leaves",{
+        return fetch("https://hrmanagement369.herokuapp.com/api/leave/my_leaves",{
             method:"GET",
             headers:{
                 "Authorization":token

@@ -6,7 +6,7 @@ dotenv.config();
 // DB Connection function
 const dbConnection = async () => {
   try {
-    await mongoose.connect(process.env.URI, {
+    await mongoose.connect("mongodb+srv://stackhack:Stackhack123456@stackhack.hrj84.mongodb.net/stackhack?retryWrites=true&w=majority", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,

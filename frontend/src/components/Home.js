@@ -53,10 +53,11 @@ const Home = (props) => {
   };
 
   const elogin = async (user_data) => {
-    return fetch("http://localhost:5000/api/users/login", {
+    return fetch("https://hrmanagement369.herokuapp.com/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin":"*"
       },
       body: JSON.stringify(user_data),
     })

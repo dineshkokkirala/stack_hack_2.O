@@ -44,7 +44,7 @@ const AddEmploye = (props) => {
   } = employee;
 
   const addEmployee = (data) =>{
-    return fetch("http://localhost:5000/api/admin/add",{
+    return fetch("https://hrmanagement369.herokuapp.com/api/admin/add",{
       method:"POST",
       headers:{
         "Content-Type":"application/json",

@@ -16,7 +16,7 @@ const PendingLeaves = (props) => {
 
     const getPendingLeaves = ()=>{
         let token = JSON.parse(localStorage.getItem("token")).token;
-        return fetch("http://localhost:5000/api/leave/pending_all",{
+        return fetch("https://hrmanagement369.herokuapp.com/api/leave/pending_all",{
             method:"GET",
             headers:{
                 "Authorization":token
@@ -50,7 +50,7 @@ const PendingLeaves = (props) => {
 
     const getLeaveDetail =(id)=>{
         let token = JSON.parse(localStorage.getItem("token")).token;
-        return fetch(`http://localhost:5000/api/leave/${id}`,{
+        return fetch(`https://hrmanagement369.herokuapp.com/api/leave/${id}`,{
             method:"GET",
             headers:{
                 "Authorization":token
@@ -78,7 +78,7 @@ const PendingLeaves = (props) => {
     }
 
     const approvingLeave=(id)=>{
-        return fetch(`http://localhost:5000/api/leave/approve/${id}`,{
+        return fetch(`https://hrmanagement369.herokuapp.com/api/leave/approve/${id}`,{
             method:"POST",
             headers:{
                 "Authorization":JSON.parse(localStorage.getItem("token")).token,
@@ -106,7 +106,7 @@ const PendingLeaves = (props) => {
     }
 
     const rejectingLeave=(id)=>{
-        return fetch(`http://localhost:5000/api/leave/reject/${id}`,{
+        return fetch(`https://hrmanagement369.herokuapp.com/api/leave/reject/${id}`,{
             method:"POST",
             headers:{
                 "Authorization":JSON.parse(localStorage.getItem("token")).token,
