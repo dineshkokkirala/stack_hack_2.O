@@ -238,6 +238,7 @@ const Home = (props) => {
     <div className="bg-container">
       <div className="container">
         <div className="row"> 
+        
           <div className="col-12 col-md-6 mt-5">
             <div
               className="card shadow text-center p-4"

@@ -154,10 +154,10 @@ const Employee = () => {
                         <label className="form-label"><h5>Change your password</h5></label>
                         <div className="form-group div2">
                           {/* <i className="fa-eye-slash fas img" id="show1" style={{ cursor: "pointer" }}></i> */}
-                          <input type="text" placeholder="Old Password" name="old_password" value={old_password} onChange={changeHandler} className="form-control mb-2" />
+                          <input type="password" placeholder="Old Password" name="old_password" value={old_password} onChange={changeHandler} className="form-control mb-2" />
                         </div>
                         <input type="password" placeholder="New Password" name="new_password" value={new_password} onChange={changeHandler} className="form-control mb-2" />
-                        <input type="text" placeholder="Confirm Password" name="confirm_password" value={confirm_password} onChange={changeHandler} className="form-control mb-3" />
+                        <input type="password" placeholder="Confirm Password" name="confirm_password" value={confirm_password} onChange={changeHandler} className="form-control mb-3" />
                         <button className="btn w-100 btn-success">Change Password</button>
                     </form>
                 </div>

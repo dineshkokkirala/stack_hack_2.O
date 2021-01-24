@@ -44,11 +44,12 @@ const AddEmploye = (props) => {
   } = employee;
 
   const addEmployee = (data) =>{
+    let token = JSON.parse(localStorage.getItem("token")).token
     return fetch("https://hrmanagement369.herokuapp.com/api/admin/add",{
       method:"POST",
       headers:{
         "Content-Type":"application/json",
-        "Authorization":localStorage.getItem("token")
+        "Authorization":token
       },
       body:JSON.stringify(data)
     }).then((res)=>{
@@ -189,9 +190,9 @@ const AddEmploye = (props) => {
               onChange={changeHandler}
             >
               <option selected defaultValue="">Choose...</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
             </select>
           </div>
 
