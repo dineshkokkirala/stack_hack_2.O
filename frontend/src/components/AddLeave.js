@@ -21,7 +21,7 @@ const AddLeave = (props) => {
 
     const applyLeave =(data)=>{
         let token = JSON.parse(localStorage.getItem("token2")).token
-        return fetch("https://hrmanagement369.herokuapp.com/api/leave/addleave",{
+        return fetch("https://deploy-backend-hr-management.onrender.com/api/leave/addleave",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",

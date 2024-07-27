@@ -38,6 +38,10 @@ app.get("/test", (req, res) => {
   res.send("Ready to Rock!!!");
 });
 
+app.get("/", (req, res) => {
+  res.send("Hello from backend!!");
+});
+
 
 // Listening to the PORT
 app.listen(PORT, () => {

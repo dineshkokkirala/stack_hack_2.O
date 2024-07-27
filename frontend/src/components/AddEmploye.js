@@ -45,7 +45,7 @@ const AddEmploye = (props) => {
 
   const addEmployee = (data) =>{
     let token = JSON.parse(localStorage.getItem("token")).token
-    return fetch("https://hrmanagement369.herokuapp.com/api/admin/add",{
+    return fetch("https://deploy-backend-hr-management.onrender.com/api/admin/add",{
       method:"POST",
       headers:{
         "Content-Type":"application/json",

@@ -8,6 +8,7 @@ const router = express.Router();
 //  Desc    -   Adding Employee by Admin
 //  Access  -   Private (Admin)
 //  Method  -   POST
+//protect,isAdminUser,
 router.route("/add").post(protect,isAdminUser,addEmploye);
 
 //  Route   -   /api/admin/all
